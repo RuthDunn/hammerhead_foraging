@@ -125,10 +125,7 @@ results <- run.jags(hammerheads, n.chains = 3,
 sumr<-summary(results)
 sumr
 
-# test <- add.summary(results, confidence = c(0.5, 0.75, 0.95))
-# test_save <- summary(test)
-
-# write.csv(test.save, "ModelOutput_01.csv")
+write.csv(sumr, "JAGS_scripts/Model_output.csv")
 
 # ~~~~~~~~~~~~~~~~~~~~~~~
 

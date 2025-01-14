@@ -43,7 +43,7 @@ library(tidyverse)
 
 # Priors: Teloests via sonar ####
 
-# Sonar tags to estimate encounter rates of teleost prey
+# Sonar tags to estimate encounter rates of teleost prey (Gulf only)
 # Each echogram represents 30 s of a deployment
 teleosts_sonar <- read_csv("from_Erin/Spencer et al echogram by hour.csv") %>%
   dplyr::select(-"Hour")
@@ -57,6 +57,7 @@ mean(rowMeans(read_csv("from_Erin/Spencer et al echogram by hour.csv") %>%
 sd(rowMeans(read_csv("from_Erin/Spencer et al echogram by hour.csv") %>%
                 dplyr::select(-"Hour")))
 # SD = 14
+
 hist(rowMeans(read_csv("from_Erin/Spencer et al echogram by hour.csv") %>%
                 dplyr::select(-"Hour")))
 gammaPr(15,14)
@@ -73,29 +74,42 @@ gammaPr(0.005, 0.003) # gamma because tau must be positive
 
 # Video deployments to estimate encounter rates of teloest prey
 # Encounter defined as the presence of a teleost on a video within a 30 s window
-teleosts_video <- read_csv("from_Erin/Spencer et al video encounter by hour.csv") %>%
-  dplyr::select(-"Hour")
+teleosts_video_atlantic <- read_csv("from_Erin/Spencer et al video encounter by hour.csv") %>%
+  dplyr::select(c("Shark 3", "Shark 7"))
+teleosts_video_gulf <- read_csv("from_Erin/Spencer et al video encounter by hour.csv") %>%
+  dplyr::select(c("Shark 5"))
 # So each row here is an hour of 30 s echograms and the sum of teleosts seen over each hour?
 # Hourly prey encounter rate (x 10) for 3 sharks
 
+# ATLANTIC
 # Mu:
-mean(rowMeans(read_csv("from_Erin/Spencer et al video encounter by hour.csv") %>%
-                dplyr::select(-"Hour")) %>%
+mean(rowMeans(teleosts_video_atlantic) %>%
        na.omit())
-# Mean = 6
-sd(rowMeans(read_csv("from_Erin/Spencer et al video encounter by hour.csv") %>%
-                dplyr::select(-"Hour")) %>%
+# Mean = 8
+sd(rowMeans(teleosts_video_atlantic) %>%
        na.omit())
-# SD = 3
-hist(rowMeans(read_csv("from_Erin/Spencer et al video encounter by hour.csv") %>%
-                dplyr::select(-"Hour")))
-gammaPr(6,3)
-
+# SD = 6
+hist(rowMeans(teleosts_video_atlantic))
+gammaPr(8,6)
 # Tau:
-hist(1/apply(read_csv("from_Erin/Spencer et al video encounter by hour.csv") %>%
-               dplyr::select(-"Hour"), 2, sd, na.rm = T)^2)
+hist(1/apply(teleosts_video_atlantic, 2, sd, na.rm = T)^2)
 1/3^2
 gammaPr(0.1111, 0.13) # gamma because tau must be positive
+
+# GULF:
+# Mu:
+mean(rowMeans(teleosts_video_gulf) %>%
+       na.omit())
+# Mean = 8
+sd(rowMeans(teleosts_video_gulf) %>%
+     na.omit())
+# SD = 6
+hist(rowMeans(teleosts_video_gulf))
+gammaPr(5,8)
+# Tau:
+hist(1/apply(teleosts_video_gulf, 2, sd, na.rm = T)^2)
+1/8^2
+gammaPr(0.015625, 0.13) # gamma because tau must be positive
 
 # ~~~~~~~~~~~~~~~~~~~~~~~
 

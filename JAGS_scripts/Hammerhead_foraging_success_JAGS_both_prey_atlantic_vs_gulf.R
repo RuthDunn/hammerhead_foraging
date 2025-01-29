@@ -37,12 +37,14 @@ hammerheads <- "model {
     t_encounter_A[i] ~ dpois(teleost_A[i])
     
     # Foraging success rates: Teleosts by location
-    foraging_success_G_40[i] <- t_encounter_G[i] * 0.4
+    foraging_success_G_20[i] <- t_encounter_G[i] * 0.2
     foraging_success_G_30[i] <- t_encounter_G[i] * 0.3
+    foraging_success_G_40[i] <- t_encounter_G[i] * 0.4
     foraging_success_G_50[i] <- t_encounter_G[i] * 0.5
     
-    foraging_success_A_40[i] <- t_encounter_A[i] * 0.4
+    foraging_success_A_20[i] <- t_encounter_A[i] * 0.2
     foraging_success_A_30[i] <- t_encounter_A[i] * 0.3
+    foraging_success_A_40[i] <- t_encounter_A[i] * 0.4
     foraging_success_A_50[i] <- t_encounter_A[i] * 0.5
     
     # Encounter rates: Black-tips
@@ -71,12 +73,14 @@ hammerheads <- "model {
   mean_t_encounter_G <- mean(t_encounter_G[])
   mean_t_encounter_A <- mean(t_encounter_A[])
   
-  mean_foraging_success_G_40 <- mean(foraging_success_G_40[])
+  mean_foraging_success_G_20 <- mean(foraging_success_G_20[])
   mean_foraging_success_G_30 <- mean(foraging_success_G_30[])
+  mean_foraging_success_G_40 <- mean(foraging_success_G_40[])
   mean_foraging_success_G_50 <- mean(foraging_success_G_50[])
   
-  mean_foraging_success_A_40 <- mean(foraging_success_A_40[])
+  mean_foraging_success_A_20 <- mean(foraging_success_A_20[])
   mean_foraging_success_A_30 <- mean(foraging_success_A_30[])
+  mean_foraging_success_A_40 <- mean(foraging_success_A_40[])
   mean_foraging_success_A_50 <- mean(foraging_success_A_50[])
   
   mean_bt_encounter_summer <- mean(bt_encounter_summer[])
@@ -111,7 +115,7 @@ hammerheads <- "model {
   
   # Data and monitoring nodes
   #data# nsharks, speed_mean, speed_tau, perception_diameter
-  #monitor# mean_t_encounter_G, mean_t_encounter_A, mean_foraging_success_G_40, mean_foraging_success_G_30, mean_foraging_success_G_50, mean_foraging_success_A_40, mean_foraging_success_A_30, mean_foraging_success_A_50, mean_bt_encounter_summer, mean_bt_encounter_winter, mean_foraging_success_bt_s_15, mean_foraging_success_bt_s_10, mean_foraging_success_bt_s_5, mean_foraging_success_bt_w_15, mean_foraging_success_bt_w_10, mean_foraging_success_bt_w_5
+  #monitor# mean_t_encounter_G, mean_t_encounter_A, mean_foraging_success_G_20, mean_foraging_success_G_30, mean_foraging_success_G_40, mean_foraging_success_G_50, mean_foraging_success_A_20, mean_foraging_success_A_30, mean_foraging_success_A_40, mean_foraging_success_A_50, mean_bt_encounter_summer, mean_bt_encounter_winter, mean_foraging_success_bt_s_15, mean_foraging_success_bt_s_10, mean_foraging_success_bt_s_5, mean_foraging_success_bt_w_15, mean_foraging_success_bt_w_10, mean_foraging_success_bt_w_5
   
 }"
 
